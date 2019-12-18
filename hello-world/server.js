@@ -11,7 +11,7 @@ router.use(bodyParser.urlencoded({ extended: true }))
 router.use(awsServerlessExpressMiddleware.eventContext())
 
 router.get('/', (req, res) => {
-    res.json({ message: "hello!" })
+    res.json({ message: "hello!", ...(req.apiGateway.event || {}) })
 })
 
 app.use('/', router)
